@@ -608,13 +608,19 @@ class HXprocess(HX):
             fluid_type = self._fluid_type
             so0.copy_like(si0)
             so1.copy_like(si1)
+            
             if fluid_type == 'ss':
                 self._run_ss()
             elif fluid_type == 'ls':
                 self._run_ls()
             elif fluid_type == 'll':
                 self._run_ll()
-    
+            elif not fluid_type:
+            ## Add VLE-based hx calculation
+            ## Specify enthalpy exchanged
+            
+                raise ValueError('Fluid type must belong to [ss, ls, ll].')
+                
     def _run_ss(self):
         dT = self.dT
         s1f, s2f = self.outs
